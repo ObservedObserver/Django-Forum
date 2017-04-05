@@ -22,13 +22,30 @@ A Django Forum with SemanticUI<br>单纯为了测试Django的使用体验，所�
 ## Demo
 
 这里将展示部分界面的样式<br>
+
 ---
+
 主页样式
+
 ![Alt text](./demo/D01.png "主页样式")
-<br>------
+<br>
+
+---
+
 文章详情页
+
 ![Alt text](./demo/D02.png)
-<br>------评论
+<br>
+
+---
+
+评论
+
 ![Alt text](./demo/D03.png)
-<br>------再编辑修改
+<br>
+
+---
+
+再编辑修改
+
 ![Alt text](./demo/D05.png)
