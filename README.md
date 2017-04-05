@@ -9,9 +9,9 @@ A Django Forum with SemanticUI<br>
 
 ### 搭建本地服务器并创建合并数据库
 
-> python manage.py runserver
-> python manage.py makemigrations
-> python manage.py migrate
+> python manage.py runserver<br>
+> python manage.py makemigrations<br>
+> python manage.py migrate<br>
 	
 ### 创建网站管理员账户
 
