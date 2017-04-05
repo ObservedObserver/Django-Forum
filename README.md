@@ -18,3 +18,11 @@ A Django Forum with SemanticUI<br>单纯为了测试Django的使用体验，所�
 > python manage.py createsuperuser
 	
 访问localhost/admin即可进入数据库
+
+## Demo
+
+![Alt text](./demo/D01.png)
+![Alt text](./demo/D02.png)
+![Alt text](./demo/D03.png)
+![Alt text](./demo/D04.png)
+![Alt text](./demo/D05.png)
