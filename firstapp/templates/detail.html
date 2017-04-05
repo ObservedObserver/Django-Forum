@@ -1,0 +1,127 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>detail</title>
+    <link rel="stylesheet" href="{% static 'css/semantic.css'%}" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="{% static 'detail.css'%}" media="screen" title="no title" charset="utf-8">
+  </head>
+  <body>
+    <div class="sideBar">
+      <div class="ui vertical labeled icon inverted menu">
+        <a class="active blue item" href="{% url 'blog' %}"><i class="home icon"></i> Home </a>
+        <a class="active green item" href="{% url 'publish' %}"><i class="edit icon"></i> Publish </a>
+        <a class="active yellow item" href="https://github.com/ObservedObserver"><i class="github alternate icon"></i> Github </a>
+        <a class="active red item" href="http://ooerx.lofter.com/"><i class="code icon"></i> Blog </a>
+      </div>
+    </div>
+    <div class="ui container">
+      <div class="ui segment nav">
+        {% if editable is not True %}
+        <h2 class="ui header">{{article.title}}</h2>
+        <i class="eye teal icon"></i> {{article.views}} views | <i class="heart pink icon"></i> {{article.favs}} favs |
+          {% if IDchecked is True %}
+            <a href="{% url 'editArticle' article.id %}"><i class="edit grey icon"></i></a>
+          {% endif %}
+        <div class="ui divider"></div>
+        <p>
+          {{ article.content }}
+        </p>
+        {% else %}
+        <form class="ui tiny form" action="{% url 'editArticle' article.id %}" method="post">
+          {% csrf_token %}
+          {% for field in form %}
+          <div class="field" placeholder="Last Name">
+           <div class="ui pointing below red basic label">{{field.label}}</div>
+           {{field}}
+           {{field.errors}}
+         </div>
+          {% endfor %}
+          <button type="submit" class="ui inverted circular red button">Done</button>
+        </form>
+        {% endif %}
+      </div>
+      <div class="ui segment nav">
+
+
+
+        <div class="ui comments">
+          <div class="ui horizontal divider">Author</div>
+          <div class="comment">
+            <a class="avatar">
+              <img src="{{article.author.info.img}}">
+            </a>
+            <div class="content">
+              <a class="author">{{article.author.username}}</a>
+              <div class="text">Published in:{{article.createtime}}
+            </div>
+          </div>
+          {% if editable is not True %}
+            <div class="ui horizontal divider">Comments</div>
+              <form action="{% url 'detail_vote' article.id %}" method="post">
+                {% csrf_token %}
+                {% if User_vote and User_vote.vote == 'like' %}
+                <div class="ui labeled button" tabindex="0">
+                  <button class="ui red button"><i class="heart icon"></i> Liked </button>
+                  <a class="ui basic red label">
+                    {{article.favs}}
+                  </a>
+                </div>
+                {% else %}
+                <div class="ui labeled button" tabindex="0">
+                  <button class="ui button"><i class="heart icon"></i> Like </button>
+                  <a class="ui basic label">
+                    {{like_count}}
+                  </a>
+                </div>
+                {% endif %}
+
+              </form>
+
+              {% if best_comment %}
+              <div class="ui mini red left ribbon label">
+                <i class="icon fire"></i>
+                Best
+              </div>
+              <div class="best comment">
+                <a class="avatar">
+                  <img src="http://www.semantic-ui.cn/images/avatar/small/elliot.jpg">
+                </a>
+                <div class="content">
+                  <a class="author">{{best_comment.name}}</a>
+                  <div class="text">{{best_comment.comment}} </div>
+              </div>
+              <div class="ui divider">
+
+              </div>
+              {% endif %}
+              {% for comment in article.under_comments.all %}
+              <div class="comment">
+                <a class="avatar">
+                  <img src="{{comment.name.info.img}}" alt="vistor">
+                </a>
+                <div class="content">
+                  <a class="author">{{comment.name.username}}</a>
+                  <div class="text">{{comment.comment}} </div>
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+
+            <form class="ui tiny form" method="post">
+              {% csrf_token %}
+              {% for field in form %}
+              <div class="field">
+                {{field.label}}
+                {{field}}
+                {{field.errors}}
+              </div>
+              {% endfor %}
+              <button type="submit" class="ui teal button" name="button">Comment</button>
+            </form>
+          {% endif %}
+      </div>
+    </div>
+  </body>
+</html>

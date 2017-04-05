@@ -1,0 +1,25 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Publish</title>
+    <link rel="stylesheet" href="{% static 'css/semantic.css'%}" media="screen" title="no title" charset="utf-8">
+    <link rel="stylesheet" href="{% static 'detail.css'%}" media="screen" title="no title" charset="utf-8">
+  </head>
+  <body>
+    <div class="ui container">
+      <div class="ui segment nav">
+        <form class="ui tiny form" method="post">
+          {% csrf_token %}
+          {% for field in form %}
+          <div class="field">
+            {{field.label}}
+            {{field}}
+          </div>
+          {% endfor %}
+          <button type="submit" class="ui blue inverted button" name="button">Publish</button>
+        </form>
+      </div>
+  </body>
+</html>

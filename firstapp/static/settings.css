@@ -1,0 +1,13 @@
+.ui.inverted.vertical.segment.navBanner{
+  background-image: url('images/star_banner.jpg');
+  background-size: cover;
+  background-position: 0px 400px;
+  height:300px;
+  padding: 100px;
+}
+.ui.inverted.fixed.menu.trans{
+  background-color: rgba(0, 0, 0, 0.68) !important;
+}
+.ch-grey{
+  background-color: rgba(63, 64, 69, 0.1) !important;
+}

@@ -1,0 +1,140 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>first web</title>
+        <link rel="stylesheet" href="{% static 'css/semantic.css' %}" media="screen" title="no title" charset="utf-8">
+        <link rel="stylesheet" href="{% static 'settings.css' %}" media="screen" title="no title" charset="utf-8">
+    </head>
+    <body>
+      <div class="ui inverted fixed menu trans">
+        <div class="right menu">
+          {% if request.user.is_authenticated %}
+          <div class="item">
+            <a href="{% url 'publish' %}"><button class="ui inverted red circular button">Publish</button></a>
+          </div>
+          <div class="item">
+            <span style="margin-right:20px;">{{ request.user.username }}</span>
+                <div class="ui mini circular image">
+                      <img src="{{ request.user.info.img }}" alt="" />
+                </div>
+          </div>
+          <div class="item">
+            <a href="{% url 'logout' %}"><button class="ui inverted circular button">Logout</button></a>
+          </div>
+          {% else %}
+          <div class="item">
+            <span style="margin-right:20px;">Vistor</span>
+                <div class="ui mini circular image">
+                      <img src="" alt="IMG" />
+                </div>
+          </div>
+          <div class="item">
+            <a href="{% url 'userLogin' %}"><button class="ui inverted circular button">Login</button></a>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+        <div class="ui inverted vertical segment navBanner">
+            <div class="ui inverted center aligned container">
+              <h1 class="ui inverted header">Django Forum</h1>
+              <p>
+                A Django Python Project by CH.
+              </p>
+            </div>
+        </div>
+
+        <div class="ui  vertical ch-grey segment">
+          <div class="ui container">
+            <div class="ui grid">
+              <div class="four wide column">
+                <div class="ui three item menu">
+                  <a href="{% url 'blog' %}" class="item">all</a>
+                  <a href="{% url 'blog' 'tech' %}" class="item">tech</a>
+                  <a href="{% url 'blog' 'life'%}" class="item">life</a>
+                </div>
+              </div>
+              <div class="two wide column">
+                <div class="ui menu">
+                  <div class="ui dropdown simple fluid item">Order By <i class="dropdown icon"></i>
+                    <div class=" menu">
+                      <a href="?orderBy=createtime" class="item">Date</a>
+                      <a href="?orderBy=views" class="item">views</a>
+                      <a href="?orderBy=favs" class="item">favs</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          {% for article in article_list %}
+            <div class="ui container blue segment">
+                <div class="ui blue right ribbon label">
+                    {{article.tag}}
+                </div>
+                <h1 class="ui header">{{article.title}}</h1>
+                <p>
+                    {{article.content|truncatewords:90}}
+                </p>
+                <div class="ui basic segment">
+                  <i class="eye teal icon"></i> {{article.views}} views | <i class="heart pink icon"></i> {{article.favs}} favs
+                </div>
+                <a href="{% url 'detail' article.id %}"><button type="button" name="button" class="ui inverted blue button">Read more</button></a>
+            </div>
+            {% endfor %}
+            <div class="ui center aligned container">
+              <div class="ui compact menu">
+                {% if cate is not None %}
+                  {% if article_list.has_previous %}
+                  <a href="{% url 'blog' cate article_list.previous_page_number %}" class="item">
+                    <i class="left red arrow icon"></i>
+                  </a>
+                  {% else %}
+                  <a href="{% url 'blog' cate article_list.start_index %}" class="item">
+                    <i class="left red arrow icon"></i>
+                  </a>
+                  {% endif %}
+                  {% if article_list.has_next %}
+                  <a href="{% url 'blog' cate article_list.next_page_number %}" class="item">
+                    <i class="right red arrow icon"></i>
+                  </a>
+                  {% else %}
+                  <a href="{% url 'blog' cate article_list.end_index %}" class="item">
+                    <i class="right red arrow icon"></i>
+                  </a>
+                  {% endif %}
+                {% else %}
+                  {% if article_list.has_previous %}
+                  <a href="{% url 'blog' article_list.previous_page_number %}" class="item">
+                    <i class="left red arrow icon"></i>
+                  </a>
+                  {% else %}
+                  <a href="{% url 'blog' article_list.start_index %}" class="item">
+                    <i class="left red arrow icon"></i>
+                  </a>
+                  {% endif %}
+                  {% if article_list.has_next %}
+                  <a href="{% url 'blog' article_list.next_page_number %}" class="item">
+                    <i class="right red arrow icon"></i>
+                  </a>
+                  {% else %}
+                  <a href="{% url 'blog' article_list.end_index %}" class="item">
+                    <i class="right red arrow icon"></i>
+                  </a>
+                  {% endif %}
+                {% endif %}
+              </div>
+            </div>
+
+        </div>
+
+        <div class="ui inverted  vertical very padded  segment">
+            OOer-CH®
+        </div>
+    </body>
+</html>

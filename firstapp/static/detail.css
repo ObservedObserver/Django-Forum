@@ -1,0 +1,17 @@
+body{
+  background-image: url('images/star_banner.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+}
+.ui.segment.nav{
+  max-width:700px;
+  margin: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.sideBar{
+  position: fixed;
+  left:0px;
+  bottom:10%;
+  z-index: 2;
+}
