@@ -4,7 +4,7 @@ A Django Forum with SemanticUI<br>
 ## 使用
 安装**Django**<br>
 
-	>pip install Django
+> pip install Django
 搭建本地服务器	并创建合并数据库<br>
 
 	> python manage.py runserver
