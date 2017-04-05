@@ -17,4 +17,4 @@
 *.RTF	 diff=astextplain
 
 
-*.css linguist-language=Scala
+*.css linguist-language=Python
