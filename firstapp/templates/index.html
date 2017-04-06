@@ -6,6 +6,8 @@
         <title>first web</title>
         <link rel="stylesheet" href="{% static 'css/semantic.css' %}" media="screen" title="no title" charset="utf-8">
         <link rel="stylesheet" href="{% static 'settings.css' %}" media="screen" title="no title" charset="utf-8">
+        <script src="{% static 'script/jquery.js' %}"></script>
+        <script src="{% static 'script/main.js' %}"></script>
     </head>
     <body>
       <div class="ui inverted fixed menu trans">
@@ -73,8 +75,8 @@
 
 
           {% for article in article_list %}
-            <div class="ui container blue segment">
-                <div class="ui blue right ribbon label">
+            <div class="ui container segment stag">
+                <div class="ui right ribbon label">
                     {{article.tag}}
                 </div>
                 <h1 class="ui header">{{article.title}}</h1>
